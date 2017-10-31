@@ -1,0 +1,23 @@
+{
+  "name": "serverless-plugin-automatic-certificate",
+  "version": "1.0.0",
+  "description": "Serverless plugin to replace ACM Certificate resources with a custom resource, supporting regions and automatic verification",
+  "main": "index.js",
+  "repository": "git@github.com:lyuzashi/serverless-plugin-automatic-certificate.git",
+  "author": "Ben Patterson",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.141.0",
+    "cfn-response": "^1.0.1",
+    "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "add-custom-resource": "^1.0.1",
+    "aws-sdk-mock": "^1.7.0",
+    "traverse": "^0.6.6",
+    "uglify-es": "^3.1.6"
+  }
+}
