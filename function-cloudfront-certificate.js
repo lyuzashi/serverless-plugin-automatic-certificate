@@ -54,6 +54,7 @@ module.exports.handler = function(event, context) {
   }
 
   const waitForIdentity = () => {
+    // Rule set could be created while this waits. Promise.all?
     return ses.waitFor('identityExists', { Identities: [ Domain ] }).promise()
       .then(({ VerificationAttributes }) => {
         console.log(`Wait for`, VerificationAttributes)
@@ -63,11 +64,18 @@ module.exports.handler = function(event, context) {
     })
   }
 
-  const createReceiptRuleSet = () => {
-    // Or use existing active one...
-  }
+  const createReceiptRuleSet = () => (
+    ses.describeActiveReceiptRuleSet().promise().then(({ Metadata, ...description }) => {
+      if(Metadata && Metadata.Name) Promise.resolve({ Metadata, ...description });
+      const RuleSetName = 'certificate-authorize-rules';
+      return ses.createReceiptRuleSet({ RuleSetName }).promise().then(response => (
+        Promise.resolve({ Metadata: { Name: RuleSetName }, ...response })
+      ));
+    })
+  )
 
-  const createReceiptRule = () => {
+  const createReceiptRule = ({ Metadata: { Name: RuleSetName }, Rules }) => {
+    // Check if rule exists, or use rule list to place new rule
 
   }
 

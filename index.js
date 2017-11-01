@@ -76,6 +76,7 @@ class CloudfrontCertificatePlugin {
                     'ses:VerifyDomainIdentity',
                     'ses:DeleteIdentity',
                     'ses:GetIdentityVerificationAttributes',
+                    'ses:DescribeActiveReceiptRuleSet',
                     'route53:ChangeResourceRecordSets',
                   ],
                   Resource: '*',
